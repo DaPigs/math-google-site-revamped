@@ -52,6 +52,6 @@ def catch_all(path):
     if(path.endswith("/")):
         path = path[:-1]
     path1 = path.split("/")
-    update = "" if path else "<h1>Updated 22nd May 2023</h1><br><br>"
+    update = "" if path else "<h1>Updated 26th July 2023</h1><br><br>"
     return update + new_dict_to_html(get_dic(urls, path1), "/"+path) + "<br><br>" +  dict_to_html(get_dic(urls, path1), path)
 app.run()

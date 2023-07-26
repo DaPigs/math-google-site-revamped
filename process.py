@@ -1,8 +1,23 @@
-import modules, json, time
+import modules
+urls = []
+html = modules.HTML(modules.read_file("dropdown.html"))
+for i in html.find_elements_by_xpath(modules.xpath.tag("li")):
+    for a in i.find_elements_by_xpath(modules.xpath.tag("a")):
+        url = a.get_attribute("href")
+        display = True
+        for x in ["home", "videos"]:
+            if(x in url):
+                display = False
+                break
+        if(display):
+            print(url)
+            urls.append(url)
+
+import json, time
 driver = modules.Driver()
 driver.get("https://sites.google.com/hci.edu.sg/22-23-h2-math/")
+#remember to switch to mobile view and refresh
 input("Ready?")
-urls = ['/hci.edu.sg/22-23-h2-math/chapter-resources?authuser=1', '/hci.edu.sg/22-23-h2-math/chapter-resources/pure-math?authuser=1', '/hci.edu.sg/22-23-h2-math/chapter-resources/statistics?authuser=1', '/hci.edu.sg/22-23-h2-math/chapter-resources/h2-foundation-mathematics?authuser=1', '/hci.edu.sg/22-23-h2-math/chapter-resources/pure-math?authuser=1', '/hci.edu.sg/22-23-h2-math/chapter-resources/statistics?authuser=1', '/hci.edu.sg/22-23-h2-math/chapter-resources/h2-foundation-mathematics?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2022-c1-bt-revision-package?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2022-c1-promo-revision-package?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2022-c1-dec-holidays-revision-package?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2023-c2-revision-package-1?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2023-c2-revision-package-2?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2023-c2-tpe-revision-package?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2022-c1-bt-revision-package?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2022-c1-promo-revision-package?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2022-c1-dec-holidays-revision-package?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2023-c2-revision-package-1?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2023-c2-revision-package-2?authuser=1', '/hci.edu.sg/22-23-h2-math/revision-packages/2023-c2-tpe-revision-package?authuser=1', '/hci.edu.sg/22-23-h2-math/tests-exams?authuser=1', '/hci.edu.sg/22-23-h2-math/tests-exams/c2-tests-exams?authuser=1', '/hci.edu.sg/22-23-h2-math/tests-exams/c1-tests-exams?authuser=1', '/hci.edu.sg/22-23-h2-math/tests-exams/c2-tests-exams?authuser=1', '/hci.edu.sg/22-23-h2-math/tests-exams/c1-tests-exams?authuser=1', '/hci.edu.sg/22-23-h2-math/study-sessions?authuser=1', '/hci.edu.sg/22-23-h2-math/study-sessions/2023-term-1-2-mss?authuser=1', '/hci.edu.sg/22-23-h2-math/study-sessions/2022-term-3-4-mss?authuser=1', '/hci.edu.sg/22-23-h2-math/study-sessions/2023-term-1-2-mss?authuser=1', '/hci.edu.sg/22-23-h2-math/study-sessions/2022-term-3-4-mss?authuser=1']
 
 def write_dic(dictionary, items, data):
     if(len(items) == 1):
